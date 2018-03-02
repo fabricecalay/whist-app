@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 import { Player } from './player';
 import { PLAYERS } from './mock-players';
@@ -10,13 +11,15 @@ import { PLAYERS } from './mock-players';
 import { MessageService } from './message.service';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders(
+    {'Content-Type': 'application/json'},
+    )
 };
 
 @Injectable()
 export class PlayerService {
 
-  private playersUrl = 'http://localhost:9100/api/players';  // URL to web api
+  private playersUrl = environment.apiUrl + '/players';
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
@@ -45,6 +48,35 @@ export class PlayerService {
               catchError(this.handleError<Player>(`updatePlayer id=${player.id}`))
           );
   }
+
+  addPlayer(player: Player): Observable<Player> {
+    return this.http.post<Player>(`${this.playersUrl}`, player, httpOptions)
+          .pipe(
+              tap( (player:Player) => this.log(`player ${player.id} created`)),
+              catchError(this.handleError<Player>(`addPlayer`))
+          );
+  }
+
+  deletePlayer(player: Player): Observable<Player> {
+    return this.http.delete<Player>(`${this.playersUrl}/${player.id}`, httpOptions)
+          .pipe(
+              tap( (player:Player) => this.log(`player deleted`)),
+              catchError(this.handleError<Player>(`deletePlayer`))
+          );
+  }
+
+  /* GET players whose name contains search term */
+  searchPlayers(term: string): Observable<Player[]> {
+    if (!term.trim()) {
+      // if not search term, return empty player array.
+      return of([]);
+    }
+    return this.http.get<Player[]>(`${this.playersUrl}?name=${term}`).pipe(
+      tap(_ => this.log(`found players matching "${term}"`)),
+      catchError(this.handleError<Player[]>('searchPlayers', []))
+    );
+  }
+
 
   /** Log a PlayerService message with the MessageService */
   private log(message: string) {

@@ -12,6 +12,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PlayerSearchComponent } from './player-search/player-search.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     WhistComponent,
     PlayerDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    PlayerSearchComponent
   ],
   imports: [
     BrowserModule,
