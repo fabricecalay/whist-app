@@ -1,3 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.min.css";
-@import "~font-awesome/css/font-awesome.css";
+/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+/* @import "~font-awesome/css/font-awesome.css"; */
+
+/* SB ADMIN 2 THEME */
+@import "~startbootstrap-sb-admin-2/vendor/bootstrap/css/bootstrap.min.css";
+@import "~startbootstrap-sb-admin-2/vendor/metisMenu/metisMenu.min.css";
+@import "~startbootstrap-sb-admin-2/dist/css/sb-admin-2.css";
+@import "~startbootstrap-sb-admin-2/vendor/morrisjs/morris.css";
+@import "~startbootstrap-sb-admin-2/vendor/font-awesome/css/font-awesome.min.css";
