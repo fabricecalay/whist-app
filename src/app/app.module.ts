@@ -13,6 +13,7 @@ import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PlayerSearchComponent } from './player-search/player-search.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PlayerSearchComponent } from './player-search/player-search.component';
     PlayerDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    PlayerSearchComponent
+    PlayerSearchComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
